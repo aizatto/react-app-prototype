@@ -1,24 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 const App: React.FC = () => {
+  const [events, setEvents] = useState<string[]>([]);
+
+  const addEvent = (event: string) => {
+    const newEvents = events.concat([event])
+    setEvents(newEvents);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="text"
+        onClick={() => addEvent('onClick')}
+        onFocus={() => addEvent('onFocus')}
+      />
+      <pre>{events.reverse().join("\n")}</pre>
     </div>
   );
 }
